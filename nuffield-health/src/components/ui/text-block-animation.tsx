@@ -41,16 +41,9 @@ export default function TextBlockAnimation({
         const blocks: HTMLDivElement[] = []
 
         lines.forEach((line) => {
-            // Compute descender padding from actual text font-size
-            const computedSize = parseFloat(window.getComputedStyle(line).fontSize || "16")
-            const descenderPad = Math.max(computedSize * 0.25, 6)
-
             const wrapper = document.createElement("div")
             wrapper.style.position = "relative"
             wrapper.style.display = "block"
-            wrapper.style.overflow = "hidden"
-            wrapper.style.paddingBottom = descenderPad + "px"
-            wrapper.style.marginBottom = (-descenderPad * 0.4) + "px"
 
             const block = document.createElement("div")
             block.style.position = "absolute"
