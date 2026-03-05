@@ -83,7 +83,7 @@ function Slide({
 }) {
   const justify = align === "right" ? "items-end text-right" : align === "center" ? "items-center text-center" : "items-start text-left"
   return (
-    <div className={`flex h-full w-full flex-col justify-center ${justify} px-[6vw] md:px-[8vw] bg-white`}>
+    <div className={`flex h-full w-full flex-col justify-center ${justify} px-5 sm:px-[6vw] md:px-[8vw] bg-white overflow-hidden`}>
       {children}
     </div>
   )
@@ -102,19 +102,19 @@ function TitleSlide() {
         duration={0.8}
         stagger={0.1}
       >
-        <h1 className="text-[clamp(3rem,10vw,10rem)] font-black text-[#111] tracking-tighter leading-[1]">
+        <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black text-[#111] tracking-tighter leading-[1]">
           Something<br />is happening.
         </h1>
       </TextBlockAnimation>
 
       <GFadeIn delay={2}>
-        <p className="mt-8 text-[clamp(1rem,2vw,1.8rem)] text-zinc-400 font-semibold max-w-2xl">
+        <p className="mt-6 sm:mt-8 text-[clamp(0.9rem,2vw,1.8rem)] text-zinc-400 font-semibold max-w-2xl">
           A conversation about AI, boring tools, and a real opportunity.
         </p>
       </GFadeIn>
 
       <GFadeIn delay={2.6}>
-        <p className="mt-12 text-[clamp(0.8rem,1.2vw,1.1rem)] text-zinc-300 font-medium">
+        <p className="mt-8 sm:mt-12 text-[clamp(0.75rem,1.2vw,1.1rem)] text-zinc-300 font-medium">
           Chris Gowland &middot; Paul Speight
         </p>
       </GFadeIn>
@@ -124,7 +124,7 @@ function TitleSlide() {
 
 /* ═══════════════════════════════════════════════════
    SLIDE 1 — The Dot Picture + "We Are So Early"
-   Big text left, dots right
+   Stacked on mobile, side-by-side on desktop
    ═══════════════════════════════════════════════════ */
 function DotEarlySlide() {
   const COLS = 40
@@ -148,9 +148,9 @@ function DotEarlySlide() {
   }, [])
 
   return (
-    <div className="flex h-full w-full bg-white">
-      {/* Left — big text */}
-      <div className="flex flex-col justify-center px-[6vw] md:px-[8vw] w-1/2">
+    <div className="flex flex-col md:flex-row h-full w-full bg-white overflow-hidden">
+      {/* Left / Top — big text */}
+      <div className="flex flex-col justify-center px-5 sm:px-[6vw] md:px-[8vw] md:w-1/2 pt-8 md:pt-0">
         <TextBlockAnimation
           blockColor={INK}
           animateOnScroll={false}
@@ -158,7 +158,7 @@ function DotEarlySlide() {
           duration={0.8}
           stagger={0.1}
         >
-          <h1 className="text-[clamp(2rem,5.5vw,6rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+          <h1 className="text-[clamp(1.8rem,5.5vw,6rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
             6.8 billion people have never used AI.
           </h1>
         </TextBlockAnimation>
@@ -169,35 +169,34 @@ function DotEarlySlide() {
           delay={1.8}
           duration={0.5}
         >
-          <p className="mt-6 text-[clamp(1.2rem,2.5vw,2.5rem)] text-teal-700 font-black tracking-tight">
+          <p className="mt-4 md:mt-6 text-[clamp(1rem,2.5vw,2.5rem)] text-teal-700 font-black tracking-tight">
             We are so early.
           </p>
         </TextBlockAnimation>
 
         <GFadeIn delay={2.6}>
-          <p className="mt-6 text-[clamp(0.75rem,1.1vw,1.1rem)] text-zinc-400 font-medium max-w-md">
+          <p className="mt-4 md:mt-6 text-[clamp(0.7rem,1.1vw,1.1rem)] text-zinc-400 font-medium max-w-md">
             82% of American businesses aren&apos;t using AI for anything. Only 4% have mature capabilities. &mdash; Stephen Bartlett
           </p>
         </GFadeIn>
-
       </div>
 
-      {/* Right — title, dot grid, legend */}
-      <div className="flex flex-col items-center justify-center w-1/2 pr-[4vw]">
-        <GFadeIn delay={0.1} className="mb-3 text-center">
-          <h2 className="text-[clamp(1.2rem,2.2vw,2rem)] font-black text-[#111] tracking-tight">
+      {/* Right / Bottom — title, dot grid, legend */}
+      <div className="flex flex-col items-center justify-center md:w-1/2 px-4 md:pr-[4vw] md:px-0 py-4 md:py-0 flex-1 min-h-0">
+        <GFadeIn delay={0.1} className="mb-2 md:mb-3 text-center">
+          <h2 className="text-[clamp(0.9rem,2.2vw,2rem)] font-black text-[#111] tracking-tight">
             Each dot is ~3.2 million people
           </h2>
-          <p className="text-[0.65rem] text-zinc-400 mt-1">
+          <p className="text-[0.6rem] md:text-[0.65rem] text-zinc-400 mt-1">
             2,500 dots = 8.1 billion humans. Color = most advanced AI interaction, Feb 2026.
           </p>
         </GFadeIn>
 
         <div
-          className="grid gap-[2px] w-full"
+          className="grid gap-[1px] md:gap-[2px] w-full"
           style={{
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            maxWidth: "min(500px, 42vw)",
+            maxWidth: "min(500px, 85vw)",
           }}
         >
           {dots.map((dot, i) => (
@@ -212,18 +211,18 @@ function DotEarlySlide() {
           ))}
         </div>
 
-        <GFadeIn delay={3} className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[0.6rem] text-zinc-400">
+        <GFadeIn delay={3} className="mt-2 md:mt-3 flex flex-wrap justify-center gap-x-3 md:gap-x-4 gap-y-1 text-[0.55rem] md:text-[0.6rem] text-zinc-400">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI &middot; ~6.8B (84%)
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI &middot; ~6.8B (84%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot &middot; ~1.3B (16%)
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot &middot; ~1.3B (16%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo &middot; ~15-25M (0.3%)
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo &middot; ~15-25M (0.3%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold &middot; ~2-5M (0.04%)
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold &middot; ~2-5M (0.04%)
           </span>
         </GFadeIn>
       </div>
@@ -232,7 +231,7 @@ function DotEarlySlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 4 — The Boring Tools Thesis
+   SLIDE 2 — The Boring Tools Thesis
    ═══════════════════════════════════════════════════ */
 function BoringToolsSlide() {
   return (
@@ -244,13 +243,13 @@ function BoringToolsSlide() {
         duration={0.8}
         stagger={0.1}
       >
-        <h1 className="text-[clamp(3rem,9vw,9rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+        <h1 className="text-[clamp(2.2rem,9vw,9rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
           The flashy AI phase is over.
         </h1>
       </TextBlockAnimation>
 
       <GFadeIn delay={1.4}>
-        <p className="mt-6 text-[clamp(1rem,2vw,1.8rem)] text-zinc-500 font-medium max-w-2xl ml-auto leading-relaxed">
+        <p className="mt-4 md:mt-6 text-[clamp(0.85rem,2vw,1.8rem)] text-zinc-500 font-medium max-w-2xl ml-auto leading-relaxed">
           People don&apos;t know what to ask. The answers are too broad. It doesn&apos;t fit into existing workflows.
         </p>
       </GFadeIn>
@@ -261,7 +260,7 @@ function BoringToolsSlide() {
         delay={2.2}
         duration={0.6}
       >
-        <p className="mt-6 text-[clamp(2rem,5vw,5rem)] text-teal-700 font-black tracking-tight">
+        <p className="mt-4 md:mt-6 text-[clamp(1.5rem,5vw,5rem)] text-teal-700 font-black tracking-tight">
           The real revolution is boring.
         </p>
       </TextBlockAnimation>
@@ -270,7 +269,7 @@ function BoringToolsSlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 5 — The Electricity Analogy
+   SLIDE 3 — The Electricity Analogy
    ═══════════════════════════════════════════════════ */
 function ElectricitySlide() {
   return (
@@ -282,7 +281,7 @@ function ElectricitySlide() {
         duration={0.7}
         stagger={0.1}
       >
-        <h1 className="text-[clamp(3rem,8vw,8rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+        <h1 className="text-[clamp(2rem,8vw,8rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
           Power stations made headlines.
         </h1>
       </TextBlockAnimation>
@@ -294,13 +293,13 @@ function ElectricitySlide() {
         duration={0.7}
         stagger={0.1}
       >
-        <h1 className="mt-6 text-[clamp(3rem,8vw,8rem)] font-black text-teal-700 tracking-tighter leading-[1.05]">
+        <h1 className="mt-4 md:mt-6 text-[clamp(2rem,8vw,8rem)] font-black text-teal-700 tracking-tighter leading-[1.05]">
           Washing machines changed civilisation.
         </h1>
       </TextBlockAnimation>
 
       <GFadeIn delay={2.3}>
-        <p className="mt-10 text-[clamp(0.9rem,1.5vw,1.4rem)] text-zinc-500 max-w-2xl font-medium leading-relaxed">
+        <p className="mt-6 md:mt-10 text-[clamp(0.8rem,1.5vw,1.4rem)] text-zinc-500 max-w-2xl font-medium leading-relaxed">
           A meeting summariser. A policy explainer. A complaint analyser. None revolutionary. Used a hundred times a week &mdash; powerful.
         </p>
       </GFadeIn>
@@ -309,7 +308,7 @@ function ElectricitySlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 6 — The Hidden Shift
+   SLIDE 4 — The Hidden Shift
    ═══════════════════════════════════════════════════ */
 function HiddenShiftSlide() {
   return (
@@ -321,7 +320,7 @@ function HiddenShiftSlide() {
         duration={0.7}
         stagger={0.1}
       >
-        <h1 className="text-[clamp(3rem,9vw,9rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+        <h1 className="text-[clamp(2.2rem,9vw,9rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
           You no longer need a software team.
         </h1>
       </TextBlockAnimation>
@@ -332,13 +331,13 @@ function HiddenShiftSlide() {
         delay={1.4}
         duration={0.5}
       >
-        <p className="mt-8 text-[clamp(1.8rem,4vw,4rem)] text-teal-700 font-black tracking-tight">
+        <p className="mt-4 md:mt-8 text-[clamp(1.3rem,4vw,4rem)] text-teal-700 font-black tracking-tight">
           The barrier collapsed.
         </p>
       </TextBlockAnimation>
 
       <GFadeIn delay={2}>
-        <p className="mt-8 text-[clamp(0.9rem,1.5vw,1.4rem)] text-zinc-500 max-w-2xl ml-auto leading-relaxed font-medium">
+        <p className="mt-4 md:mt-8 text-[clamp(0.8rem,1.5vw,1.4rem)] text-zinc-500 max-w-2xl ml-auto leading-relaxed font-medium">
           A planning manager, an analyst, an operations lead can design AI tools &mdash; because they already understand the workflow.
         </p>
       </GFadeIn>
@@ -347,7 +346,7 @@ function HiddenShiftSlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 7 — We Built One (Progressive Carousel)
+   SLIDE 5 — We Built One (Progressive Carousel)
    ═══════════════════════════════════════════════════ */
 const screenshots = [
   {
@@ -391,7 +390,7 @@ function WeBuiltOneSlide() {
         delay={0.2}
         duration={0.7}
       >
-        <h1 className="text-[clamp(3rem,8vw,8rem)] font-black text-[#111] tracking-tighter leading-[1.05] mb-6">
+        <h1 className="text-[clamp(2rem,8vw,8rem)] font-black text-[#111] tracking-tighter leading-[1.05] mb-4 md:mb-6">
           We built one.
         </h1>
       </TextBlockAnimation>
@@ -408,7 +407,7 @@ function WeBuiltOneSlide() {
               {screenshots.map((item) => (
                 <SliderWrapper key={item.sliderName} value={item.sliderName}>
                   <img
-                    className="w-full h-[300px] md:h-[400px] object-cover object-top shadow-xl"
+                    className="w-full h-[180px] sm:h-[260px] md:h-[400px] object-cover object-top shadow-xl"
                     src={item.img}
                     alt={item.desc}
                   />
@@ -421,13 +420,13 @@ function WeBuiltOneSlide() {
                 <SliderBtn
                   key={item.sliderName}
                   value={item.sliderName}
-                  className="text-left cursor-pointer p-3 md:p-4 border-r border-zinc-200 last:border-r-0"
+                  className="text-left cursor-pointer p-2 sm:p-3 md:p-4 border-r border-zinc-200 last:border-r-0"
                   progressBarClass="bg-teal-100 h-full"
                 >
-                  <h3 className="font-bold text-xs md:text-sm text-[#111] mb-1">
+                  <h3 className="font-bold text-[0.6rem] sm:text-xs md:text-sm text-[#111] sm:mb-1 truncate">
                     {item.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-zinc-500 font-normal line-clamp-2 leading-snug">
+                  <p className="hidden sm:block text-xs md:text-sm text-zinc-500 font-normal line-clamp-1 leading-snug">
                     {item.desc}
                   </p>
                 </SliderBtn>
@@ -437,8 +436,8 @@ function WeBuiltOneSlide() {
         </div>
       </GFadeIn>
 
-      <GFadeIn delay={1.5} className="mt-4">
-        <p className="text-[clamp(0.8rem,1.2vw,1.1rem)] text-zinc-400 font-medium">
+      <GFadeIn delay={1.5} className="mt-3 md:mt-4">
+        <p className="text-[clamp(0.7rem,1.2vw,1.1rem)] text-zinc-400 font-medium">
           3,800 profiles &middot; AI quality scoring &middot; Gap analysis &middot; Content rewriting &middot; Copilot
         </p>
       </GFadeIn>
@@ -447,7 +446,7 @@ function WeBuiltOneSlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 8 — The Question
+   SLIDE 6 — The Question
    ═══════════════════════════════════════════════════ */
 const questions = [
   "Do you see a genuine market need?",
@@ -459,12 +458,12 @@ function TheQuestionSlide() {
   return (
     <Slide>
       <GFadeIn delay={0.2}>
-        <p className="text-[clamp(0.65rem,0.9vw,0.85rem)] uppercase tracking-[0.3em] text-teal-600/60 font-semibold mb-10">
+        <p className="text-[clamp(0.6rem,0.9vw,0.85rem)] uppercase tracking-[0.3em] text-teal-600/60 font-semibold mb-6 md:mb-10">
           Our ask
         </p>
       </GFadeIn>
 
-      <div className="space-y-8 w-full">
+      <div className="space-y-5 sm:space-y-6 md:space-y-8 w-full">
         {questions.map((q, i) => (
           <TextBlockAnimation
             key={i}
@@ -473,11 +472,11 @@ function TheQuestionSlide() {
             delay={0.5 + i * 0.6}
             duration={0.6}
           >
-            <div className="flex items-baseline gap-6">
-              <span className="text-[clamp(3rem,6vw,6rem)] font-black text-zinc-200 font-mono leading-none shrink-0">
+            <div className="flex items-baseline gap-3 sm:gap-4 md:gap-6">
+              <span className="text-[clamp(1.8rem,6vw,6rem)] font-black text-zinc-200 font-mono leading-none shrink-0">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="text-[clamp(1.8rem,4.5vw,4.5rem)] font-black text-[#111] tracking-tight leading-[1.05]">
+              <p className="text-[clamp(1.1rem,4.5vw,4.5rem)] font-black text-[#111] tracking-tight leading-[1.05]">
                 {q}
               </p>
             </div>
@@ -485,8 +484,8 @@ function TheQuestionSlide() {
         ))}
       </div>
 
-      <GFadeIn delay={2.4} className="mt-10">
-        <p className="text-[clamp(1rem,1.5vw,1.4rem)] text-zinc-400 font-medium max-w-2xl">
+      <GFadeIn delay={2.4} className="mt-6 md:mt-10">
+        <p className="text-[clamp(0.8rem,1.5vw,1.4rem)] text-zinc-400 font-medium max-w-2xl">
           We have good careers. We&apos;re not going to throw them away on a gut feeling. Not investment. Not a partnership. Just your honest read.
         </p>
       </GFadeIn>
@@ -495,7 +494,7 @@ function TheQuestionSlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 9 — Discussion / Close
+   SLIDE 7 — Discussion / Close
    ═══════════════════════════════════════════════════ */
 function DiscussionSlide() {
   return (
@@ -507,17 +506,17 @@ function DiscussionSlide() {
         duration={0.8}
         stagger={0.1}
       >
-        <h1 className="text-[clamp(3rem,10vw,10rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+        <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
           Over to you.
         </h1>
       </TextBlockAnimation>
 
       <GFadeIn delay={1.6}>
-        <div className="mt-10 w-20 h-px bg-teal-600/40 mx-auto" />
+        <div className="mt-6 md:mt-10 w-20 h-px bg-teal-600/40 mx-auto" />
       </GFadeIn>
 
       <GFadeIn delay={2}>
-        <p className="mt-8 text-[clamp(1rem,1.8vw,1.6rem)] text-zinc-400 font-medium">
+        <p className="mt-6 md:mt-8 text-[clamp(0.85rem,1.8vw,1.6rem)] text-zinc-400 font-medium">
           We&apos;ll send you the full demo afterwards.
         </p>
       </GFadeIn>
@@ -542,13 +541,10 @@ export default function PresentationPage() {
     [slide]
   )
 
+  /* Keyboard + touch swipe */
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (
-        e.key === "ArrowRight" ||
-        e.key === " " ||
-        e.key === "Enter"
-      ) {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter") {
         e.preventDefault()
         go(slide + 1)
       }
@@ -561,6 +557,30 @@ export default function PresentationPage() {
     window.addEventListener("keydown", handler)
     return () => window.removeEventListener("keydown", handler)
   }, [slide, go, router])
+
+  /* Swipe support for touch devices */
+  useEffect(() => {
+    let startX = 0
+    let startY = 0
+    const onStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX
+      startY = e.touches[0].clientY
+    }
+    const onEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX
+      const dy = e.changedTouches[0].clientY - startY
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        if (dx < 0) go(slide + 1)
+        else go(slide - 1)
+      }
+    }
+    window.addEventListener("touchstart", onStart, { passive: true })
+    window.addEventListener("touchend", onEnd, { passive: true })
+    return () => {
+      window.removeEventListener("touchstart", onStart)
+      window.removeEventListener("touchend", onEnd)
+    }
+  }, [slide, go])
 
   const slides = [
     <TitleSlide key="s0" />,
@@ -619,7 +639,7 @@ export default function PresentationPage() {
         </div>
 
         {/* Slide counter */}
-        <div className="fixed bottom-3 right-6 text-xs font-mono z-[60] text-zinc-300">
+        <div className="fixed bottom-3 right-4 sm:right-6 text-[0.6rem] sm:text-xs font-mono z-[60] text-zinc-300">
           {slide + 1} / {TOTAL_SLIDES}
         </div>
 
@@ -629,9 +649,10 @@ export default function PresentationPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3 }}
-            className="fixed bottom-3 left-6 text-xs text-zinc-300 z-[60]"
+            className="fixed bottom-3 left-4 sm:left-6 text-[0.6rem] sm:text-xs text-zinc-300 z-[60]"
           >
-            Click or press &rarr; to advance &middot; ESC to exit
+            <span className="hidden sm:inline">Click or press &rarr; to advance &middot; ESC to exit</span>
+            <span className="sm:hidden">Tap or swipe to advance</span>
           </motion.div>
         )}
       </div>
