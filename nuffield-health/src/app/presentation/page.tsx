@@ -319,25 +319,19 @@ function BoringToolsSlide() {
         </h1>
       </TextBlockAnimation>
 
-      <TextBlockAnimation
-        blockColor="#d1d5db"
-        animateOnScroll={false}
-        delay={1.4}
-        duration={0.6}
-        stagger={0.04}
-      >
-        <p className="mt-10 text-[clamp(1rem,2vw,1.8rem)] text-zinc-500 font-medium max-w-2xl ml-auto leading-relaxed">
+      <GFadeIn delay={1.4}>
+        <p className="mt-6 text-[clamp(1rem,2vw,1.8rem)] text-zinc-500 font-medium max-w-2xl ml-auto leading-relaxed">
           People don&apos;t know what to ask. The answers are too broad. It doesn&apos;t fit into existing workflows.
         </p>
-      </TextBlockAnimation>
+      </GFadeIn>
 
       <TextBlockAnimation
         blockColor={TEAL}
         animateOnScroll={false}
-        delay={2.4}
+        delay={2.2}
         duration={0.6}
       >
-        <p className="mt-8 text-[clamp(2rem,5vw,5rem)] text-teal-700 font-black tracking-tight">
+        <p className="mt-6 text-[clamp(2rem,5vw,5rem)] text-teal-700 font-black tracking-tight">
           The real revolution is boring.
         </p>
       </TextBlockAnimation>
