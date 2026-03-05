@@ -182,8 +182,17 @@ function DotEarlySlide() {
 
       </div>
 
-      {/* Right — dot grid + legend */}
+      {/* Right — title, dot grid, legend */}
       <div className="flex flex-col items-center justify-center w-1/2 pr-[4vw]">
+        <GFadeIn delay={0.1} className="mb-3 text-center">
+          <h2 className="text-[clamp(1.2rem,2.2vw,2rem)] font-black text-[#111] tracking-tight">
+            Each dot is ~3.2 million people
+          </h2>
+          <p className="text-[0.65rem] text-zinc-400 mt-1">
+            2,500 dots = 8.1 billion humans. Color = most advanced AI interaction, Feb 2026.
+          </p>
+        </GFadeIn>
+
         <div
           className="grid gap-[2px] w-full"
           style={{
@@ -203,18 +212,18 @@ function DotEarlySlide() {
           ))}
         </div>
 
-        <GFadeIn delay={3} className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[0.65rem] text-zinc-400">
+        <GFadeIn delay={3} className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[0.6rem] text-zinc-400">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI (84%)
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI &middot; ~6.8B (84%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot (16%)
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot &middot; ~1.3B (16%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo (0.3%)
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo &middot; ~15-25M (0.3%)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold (0.04%)
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold &middot; ~2-5M (0.04%)
           </span>
         </GFadeIn>
       </div>
@@ -399,7 +408,7 @@ function WeBuiltOneSlide() {
               {screenshots.map((item) => (
                 <SliderWrapper key={item.sliderName} value={item.sliderName}>
                   <img
-                    className="rounded-t-xl w-full h-[300px] md:h-[400px] object-cover object-top shadow-xl"
+                    className="w-full h-[300px] md:h-[400px] object-cover object-top shadow-xl"
                     src={item.img}
                     alt={item.desc}
                   />
@@ -407,7 +416,7 @@ function WeBuiltOneSlide() {
               ))}
             </SliderContent>
 
-            <SliderBtnGroup className="absolute bottom-0 h-fit text-[#111] bg-white/90 backdrop-blur-md overflow-hidden grid grid-cols-5 rounded-b-xl border-t border-zinc-200">
+            <SliderBtnGroup className="absolute bottom-0 left-0 right-0 h-fit text-[#111] bg-white/95 backdrop-blur-md overflow-hidden grid grid-cols-5 border-t border-zinc-200">
               {screenshots.map((item) => (
                 <SliderBtn
                   key={item.sliderName}
