@@ -45,6 +45,7 @@ export default function TextBlockAnimation({
             wrapper.style.position = "relative"
             wrapper.style.display = "block"
             wrapper.style.overflow = "hidden"
+            wrapper.style.paddingBottom = "0.15em"
 
             const block = document.createElement("div")
             block.style.position = "absolute"
