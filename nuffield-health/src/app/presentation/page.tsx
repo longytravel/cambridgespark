@@ -17,7 +17,7 @@ import {
 /* ═══════════════════════════════════════════════════
    Constants
    ═══════════════════════════════════════════════════ */
-const TOTAL_SLIDES = 10
+const TOTAL_SLIDES = 8
 const INK = "#111111"
 const TEAL = "#0d9488"
 
@@ -123,11 +123,12 @@ function TitleSlide() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SLIDE 1 — The Dot Picture
+   SLIDE 1 — The Dot Picture + "We Are So Early"
+   Big text left, dots right
    ═══════════════════════════════════════════════════ */
-function DotPictureSlide() {
-  const COLS = 50
-  const ROWS = 50
+function DotEarlySlide() {
+  const COLS = 40
+  const ROWS = 40
   const TOTAL = COLS * ROWS
 
   const dots = useMemo(() => {
@@ -135,169 +136,88 @@ function DotPictureSlide() {
       const row = Math.floor(i / COLS)
 
       let color = "#d4d1c8"
-      if (row >= 42) color = "#6bc589"
-      if (i >= TOTAL - 8 && i < TOTAL - 1) color = "#e5a83b"
+      if (row >= 34) color = "#6bc589"
+      if (i >= TOTAL - 6 && i < TOTAL - 1) color = "#e5a83b"
       if (i === TOTAL - 1) color = "#d95050"
 
       const invertedRow = ROWS - 1 - row
-      const delay = 0.5 + invertedRow * 0.045
+      const delay = 0.5 + invertedRow * 0.05
 
       return { color, delay }
     })
   }, [])
 
   return (
-    <Slide align="center">
-      <TextBlockAnimation
-        blockColor={INK}
-        animateOnScroll={false}
-        delay={0.1}
-        duration={0.5}
-      >
-        <h1 className="text-[clamp(1.8rem,4.5vw,4rem)] font-black text-[#111] tracking-tight mb-2">
-          Each dot is ~3.2 million people
-        </h1>
-      </TextBlockAnimation>
+    <div className="flex h-full w-full bg-white">
+      {/* Left — big text */}
+      <div className="flex flex-col justify-center px-[6vw] md:px-[8vw] w-1/2">
+        <TextBlockAnimation
+          blockColor={INK}
+          animateOnScroll={false}
+          delay={0.2}
+          duration={0.8}
+          stagger={0.1}
+        >
+          <h1 className="text-[clamp(2rem,5.5vw,6rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
+            6.8 billion people have never used AI.
+          </h1>
+        </TextBlockAnimation>
 
-      <GFadeIn delay={0.7} className="mb-5">
-        <p className="text-[clamp(0.75rem,1.2vw,1rem)] text-zinc-500 font-normal">
-          2,500 dots = 8.1 billion humans. Color = most advanced AI interaction, Feb 2026.
-        </p>
-      </GFadeIn>
+        <TextBlockAnimation
+          blockColor={TEAL}
+          animateOnScroll={false}
+          delay={1.8}
+          duration={0.5}
+        >
+          <p className="mt-6 text-[clamp(1.2rem,2.5vw,2.5rem)] text-teal-700 font-black tracking-tight">
+            We are so early.
+          </p>
+        </TextBlockAnimation>
 
-      <div
-        className="grid gap-[2px] w-full"
-        style={{
-          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-          maxWidth: "min(680px, 88vw)",
-        }}
-      >
-        {dots.map((dot, i) => (
-          <div
-            key={i}
-            className="aspect-square rounded-[1px] pres-dot"
-            style={{
-              backgroundColor: dot.color,
-              animationDelay: `${dot.delay}s`,
-            }}
-          />
-        ))}
+        <GFadeIn delay={2.6}>
+          <p className="mt-6 text-[clamp(0.75rem,1.1vw,1.1rem)] text-zinc-400 font-medium max-w-md">
+            82% of American businesses aren&apos;t using AI for anything. Only 4% have mature capabilities. &mdash; Stephen Bartlett
+          </p>
+        </GFadeIn>
+
+        <GFadeIn delay={3} className="mt-6 flex flex-wrap gap-x-4 gap-y-1.5 text-[0.65rem] text-zinc-400">
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI (84%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot (16%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo (0.3%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold (0.04%)
+          </span>
+        </GFadeIn>
       </div>
 
-      <GFadeIn delay={1.8} className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-zinc-500">
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#d4d1c8]" /> Never used AI &middot; ~6.8B (84%)
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#6bc589]" /> Free chatbot user &middot; ~1.3B (16%)
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#e5a83b]" /> Pays $20/mo &middot; ~15-25M (~0.3%)
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-sm bg-[#d95050]" /> Uses coding scaffold &middot; ~2-5M (~0.04%)
-        </span>
-      </GFadeIn>
-    </Slide>
-  )
-}
-
-/* ═══════════════════════════════════════════════════
-   SLIDE 2 — "We Are So Early"
-   ═══════════════════════════════════════════════════ */
-function EarlySlide() {
-  return (
-    <Slide>
-      <TextBlockAnimation
-        blockColor={INK}
-        animateOnScroll={false}
-        delay={0.2}
-        duration={0.8}
-        stagger={0.1}
-      >
-        <h1 className="text-[clamp(3rem,9vw,9rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
-          6.8 billion people have never used AI.
-        </h1>
-      </TextBlockAnimation>
-
-      <TextBlockAnimation
-        blockColor={TEAL}
-        animateOnScroll={false}
-        delay={1.8}
-        duration={0.5}
-      >
-        <p className="mt-10 text-[clamp(1.5rem,4vw,4rem)] text-teal-700 font-black tracking-tight">
-          We are so early.
-        </p>
-      </TextBlockAnimation>
-
-      <GFadeIn delay={2.6}>
-        <p className="mt-8 text-[clamp(0.9rem,1.5vw,1.4rem)] text-zinc-400 font-medium max-w-2xl">
-          82% of American businesses aren&apos;t using AI for anything. Only 4% have mature capabilities. &mdash; Stephen Bartlett
-        </p>
-      </GFadeIn>
-    </Slide>
-  )
-}
-
-/* ═══════════════════════════════════════════════════
-   SLIDE 3 — Who We Are
-   ═══════════════════════════════════════════════════ */
-function WhoWeAreSlide() {
-  return (
-    <Slide>
-      <GFadeIn delay={0.2}>
-        <p className="text-[clamp(0.65rem,0.9vw,0.85rem)] uppercase tracking-[0.3em] text-teal-600/60 mb-6 font-semibold">
-          Quick bit of context on us
-        </p>
-      </GFadeIn>
-
-      <div className="w-full space-y-8">
-        <div>
-          <TextBlockAnimation
-            blockColor={TEAL}
-            animateOnScroll={false}
-            delay={0.4}
-            duration={0.5}
-          >
-            <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
-              Chris Gowland
-            </h2>
-          </TextBlockAnimation>
-          <GFadeIn delay={0.9}>
-            <p className="mt-3 text-[clamp(0.9rem,1.5vw,1.4rem)] text-zinc-500 font-medium max-w-3xl">
-              CCO, Nuffield Health. Cambridge 1st. 10 years at Lloyds Banking Group.
-              Led digital transformation at scale. Oxford AI Programme.
-            </p>
-          </GFadeIn>
-        </div>
-
-        <div>
-          <TextBlockAnimation
-            blockColor="#d97706"
-            animateOnScroll={false}
-            delay={1.2}
-            duration={0.5}
-          >
-            <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black text-[#111] tracking-tighter leading-[1.05]">
-              Paul Speight
-            </h2>
-          </TextBlockAnimation>
-          <GFadeIn delay={1.7}>
-            <p className="mt-3 text-[clamp(0.9rem,1.5vw,1.4rem)] text-zinc-500 font-medium max-w-3xl">
-              7 years at Lloyds Banking Group. Workforce operations for 20,000 people.
-              Knows where friction lives.
-            </p>
-          </GFadeIn>
+      {/* Right — dot grid */}
+      <div className="flex items-center justify-center w-1/2 pr-[4vw]">
+        <div
+          className="grid gap-[2px] w-full"
+          style={{
+            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+            maxWidth: "min(500px, 42vw)",
+          }}
+        >
+          {dots.map((dot, i) => (
+            <div
+              key={i}
+              className="aspect-square rounded-[1px] pres-dot"
+              style={{
+                backgroundColor: dot.color,
+                animationDelay: `${dot.delay}s`,
+              }}
+            />
+          ))}
         </div>
       </div>
-
-      <GFadeIn delay={2.4}>
-        <p className="mt-8 text-[clamp(1rem,1.8vw,1.6rem)] text-zinc-400 font-semibold max-w-3xl">
-          Neither of us has a startup pedigree. What we have is a strong feeling we&apos;re looking at something real.
-        </p>
-      </GFadeIn>
-    </Slide>
+    </div>
   )
 }
 
@@ -634,15 +554,13 @@ export default function PresentationPage() {
 
   const slides = [
     <TitleSlide key="s0" />,
-    <DotPictureSlide key="s1" />,
-    <EarlySlide key="s2" />,
-    <WhoWeAreSlide key="s3" />,
-    <BoringToolsSlide key="s4" />,
-    <ElectricitySlide key="s5" />,
-    <HiddenShiftSlide key="s6" />,
-    <WeBuiltOneSlide key="s7" />,
-    <TheQuestionSlide key="s8" />,
-    <DiscussionSlide key="s9" />,
+    <DotEarlySlide key="s1" />,
+    <BoringToolsSlide key="s2" />,
+    <ElectricitySlide key="s3" />,
+    <HiddenShiftSlide key="s4" />,
+    <WeBuiltOneSlide key="s5" />,
+    <TheQuestionSlide key="s6" />,
+    <DiscussionSlide key="s7" />,
   ]
 
   return (
