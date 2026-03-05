@@ -180,24 +180,10 @@ function DotEarlySlide() {
           </p>
         </GFadeIn>
 
-        <GFadeIn delay={3} className="mt-6 flex flex-wrap gap-x-4 gap-y-1.5 text-[0.65rem] text-zinc-400">
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI (84%)
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot (16%)
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo (0.3%)
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold (0.04%)
-          </span>
-        </GFadeIn>
       </div>
 
-      {/* Right — dot grid */}
-      <div className="flex items-center justify-center w-1/2 pr-[4vw]">
+      {/* Right — dot grid + legend */}
+      <div className="flex flex-col items-center justify-center w-1/2 pr-[4vw]">
         <div
           className="grid gap-[2px] w-full"
           style={{
@@ -216,6 +202,21 @@ function DotEarlySlide() {
             />
           ))}
         </div>
+
+        <GFadeIn delay={3} className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[0.65rem] text-zinc-400">
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d4d1c8]" /> Never used AI (84%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#6bc589]" /> Free chatbot (16%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#e5a83b]" /> Pays $20/mo (0.3%)
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#d95050]" /> Coding scaffold (0.04%)
+          </span>
+        </GFadeIn>
       </div>
     </div>
   )
