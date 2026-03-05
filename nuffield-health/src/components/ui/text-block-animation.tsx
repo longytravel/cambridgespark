@@ -32,66 +32,78 @@ export default function TextBlockAnimation({
     useGSAP(() => {
         if (!containerRef.current) return
 
-        const split = new SplitText(containerRef.current, {
-            type: "lines",
-            linesClass: "block-line-parent",
-        })
+        // Wait for fonts so SplitText measures correct line heights
+        const run = () => {
+            if (!containerRef.current) return
 
-        const lines = split.lines
-        const blocks: HTMLDivElement[] = []
+            const split = new SplitText(containerRef.current, {
+                type: "lines",
+                linesClass: "block-line-parent",
+            })
 
-        lines.forEach((line) => {
-            const wrapper = document.createElement("div")
-            wrapper.style.position = "relative"
-            wrapper.style.display = "block"
+            const lines = split.lines
+            const blocks: HTMLDivElement[] = []
 
-            const block = document.createElement("div")
-            block.style.position = "absolute"
-            block.style.top = "0"
-            block.style.left = "0"
-            block.style.width = "100%"
-            block.style.height = "100%"
-            block.style.backgroundColor = blockColor
-            block.style.zIndex = "2"
-            block.style.transform = "scaleX(0)"
-            block.style.transformOrigin = "left center"
+            lines.forEach((line) => {
+                const wrapper = document.createElement("div")
+                wrapper.style.position = "relative"
+                wrapper.style.display = "block"
+                wrapper.style.overflow = "visible"
 
-            line.parentNode!.insertBefore(wrapper, line)
-            wrapper.appendChild(line)
-            wrapper.appendChild(block)
+                const block = document.createElement("div")
+                block.style.position = "absolute"
+                block.style.top = "-10%"
+                block.style.left = "0"
+                block.style.width = "100%"
+                block.style.height = "120%"
+                block.style.backgroundColor = blockColor
+                block.style.zIndex = "2"
+                block.style.transform = "scaleX(0)"
+                block.style.transformOrigin = "left center"
 
-            gsap.set(line, { opacity: 0 })
+                line.parentNode!.insertBefore(wrapper, line)
+                wrapper.appendChild(line)
+                wrapper.appendChild(block)
 
-            blocks.push(block)
-        })
+                gsap.set(line, { opacity: 0 })
 
-        const tl = gsap.timeline({
-            defaults: { ease: "expo.inOut" },
-            scrollTrigger: animateOnScroll ? {
-                trigger: containerRef.current,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
-                ...(scroller ? { scroller } : {}),
-            } : undefined,
-            delay: delay,
-        })
+                blocks.push(block)
+            })
 
-        tl.to(blocks, {
-            scaleX: 1,
-            duration: duration,
-            stagger: stagger,
-            transformOrigin: "left center",
-        })
-        .set(lines, {
-            opacity: 1,
-            stagger: stagger,
-        }, `<${duration / 2}`)
-        .to(blocks, {
-            scaleX: 0,
-            duration: duration,
-            stagger: stagger,
-            transformOrigin: "right center",
-        }, `<${duration * 0.4}`)
+            const tl = gsap.timeline({
+                defaults: { ease: "expo.inOut" },
+                scrollTrigger: animateOnScroll ? {
+                    trigger: containerRef.current,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                    ...(scroller ? { scroller } : {}),
+                } : undefined,
+                delay: delay,
+            })
+
+            tl.to(blocks, {
+                scaleX: 1,
+                duration: duration,
+                stagger: stagger,
+                transformOrigin: "left center",
+            })
+            .set(lines, {
+                opacity: 1,
+                stagger: stagger,
+            }, `<${duration / 2}`)
+            .to(blocks, {
+                scaleX: 0,
+                duration: duration,
+                stagger: stagger,
+                transformOrigin: "right center",
+            }, `<${duration * 0.4}`)
+        }
+
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(run)
+        } else {
+            run()
+        }
 
     }, {
         scope: containerRef,
