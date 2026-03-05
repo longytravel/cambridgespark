@@ -140,7 +140,7 @@ function DotPictureSlide() {
       if (i === TOTAL - 1) color = "#d95050"
 
       const invertedRow = ROWS - 1 - row
-      const delay = 0.3 + invertedRow * 0.022
+      const delay = 0.5 + invertedRow * 0.045
 
       return { color, delay }
     })
@@ -422,31 +422,31 @@ function HiddenShiftSlide() {
 const screenshots = [
   {
     title: "Dashboard",
-    desc: "KPIs, tier distribution, and quick-win actions at a glance",
+    desc: "KPIs and tier distribution",
     img: "/presentation/dashboard.png",
     sliderName: "dashboard",
   },
   {
     title: "AI Scoring",
-    desc: "Per-profile score breakdown with evidence-backed assessments",
+    desc: "Evidence-backed scores",
     img: "/presentation/quality-scoring.png",
     sliderName: "scoring",
   },
   {
-    title: "Rewrite Engine",
-    desc: "AI-powered content improvement with benchmark comparisons",
+    title: "Rewrite",
+    desc: "AI content improvement",
     img: "/presentation/rewrite-engine.png",
     sliderName: "rewrite",
   },
   {
-    title: "Action Centre",
-    desc: "Prioritised improvements ranked by total network impact",
+    title: "Actions",
+    desc: "Prioritised quick wins",
     img: "/presentation/action-centre.png",
     sliderName: "actions",
   },
   {
-    title: "Before & After",
-    desc: "Side-by-side comparison of original and AI-enhanced content",
+    title: "Before / After",
+    desc: "Side-by-side comparison",
     img: "/presentation/before-after.png",
     sliderName: "before-after",
   },
@@ -651,12 +651,13 @@ export default function PresentationPage() {
         dangerouslySetInnerHTML={{
           __html: `
             @keyframes dotDrop {
-              from { opacity: 0; transform: translateY(-8px) scale(0.8); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
+              0% { opacity: 0; transform: translateY(-12px) scale(0.6); }
+              60% { opacity: 1; transform: translateY(1px) scale(1.05); }
+              100% { opacity: 1; transform: translateY(0) scale(1); }
             }
             .pres-dot {
               opacity: 0;
-              animation: dotDrop 0.12s ease-out forwards;
+              animation: dotDrop 0.2s ease-out forwards;
             }
           `,
         }}
